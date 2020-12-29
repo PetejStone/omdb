@@ -1,17 +1,25 @@
 import React from 'react'
 import './Main.css'
-import axios from 'axios'
+
 import {useEffect, useState} from 'react'
 const Main = props => {
-   const [title, setTitle] = useState('die+hard')
+   const [data,setData] = useState('')
     
-    axios
-    .get(`http://www.omdbapi.com/?apikey=dbfae813&t=${title}`)
-    .then(res => console.log(res.data))
-    .catch(err => console.log(err))
+    useEffect(()=>{
+        setData(props.data.Search)
+    },[props.data])
     return (
         <div className="main">
-            <h1>Hello</h1>
+            <div className="results">
+                {
+                    data && data.map((movie,index) => <div className="movie" key={index}>Title:{movie.Title} ({movie.Year})</div>)
+                }
+            </div>
+
+            <div className="nominations">
+                
+            </div>
+            
         </div>
     )
 }
