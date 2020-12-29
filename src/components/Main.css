@@ -25,5 +25,20 @@ h1 {
 
 .movie {
     margin: 10px;
-    
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.title {
+    margin-right: 1rem;
+}
+
+.nominate {
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    cursor: pointer;
 }
