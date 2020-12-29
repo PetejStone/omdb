@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 import axios from 'axios'
+import './Main.css'
 const Search = props => {
     const [title, setTitle] = useState('')
     //on submission of form
@@ -27,7 +28,7 @@ const Search = props => {
     }
     
     return (
-        <form onSubmit={(e) => onSubmit(e)}>  
+        <form className="search" onSubmit={(e) => onSubmit(e)}>  
                 <input id="input" type="text" value={title} onChange={handleChange} placeholder="search for movie" />     
                 <button onClick={onSubmit} className="formButton">Search Movie</button>
 

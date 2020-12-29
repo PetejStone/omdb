@@ -14,7 +14,6 @@
 }
 
 
-
 h1 {
     margin: 0px;
 }
@@ -35,7 +34,7 @@ h2 {
 
 }
 
-.nominate {
+button {
     width: fit-content;
     height: fit-content;
     padding: 5px;
@@ -43,3 +42,14 @@ h2 {
     border: 1px solid #000;
     cursor: pointer;
 }
+
+.search {
+    margin-bottom: auto;
+}
+
+input {
+    height: 2rem;
+    margin: 1rem;
+    font-size: 1rem;
+}
+

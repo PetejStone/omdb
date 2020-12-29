@@ -12,10 +12,8 @@ function App() {
 
     return (
       <div className="App">
-       
-        <header className="App-header">
-        </header>
-        <Search setData={setData}/>
+      
+        <Search className="search" setData={setData}/>
         <Main data={data}/>
       </div>
     );
