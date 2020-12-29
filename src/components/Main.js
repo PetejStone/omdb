@@ -10,12 +10,15 @@ const Main = props => {
    
    useEffect(()=>{
         setData(props.data.Search)
-       /// setNominations(nominations)
+        //setNominations(nominations)
         // setCount(count)
-    },[props.data,nominations])
+    },[nominations, props.data])
     
     const handleClick = (movie) => {
-      setNominations(...[nominations],nominations.push(movie))
+      const newNoms = [...nominations]
+      newNoms.push(movie)
+      setNominations(newNoms)
+      console.log(nominations)
     }
 
     return (
@@ -34,6 +37,7 @@ const Main = props => {
 
             <div className="nominations">
                 <h2>Nominations:</h2>
+                {console.log(nominations)}
 
                 {
                     nominations && nominations.map((movie,index) => 
