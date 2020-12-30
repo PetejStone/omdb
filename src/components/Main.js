@@ -15,35 +15,36 @@ const Main = props => {
    useEffect(()=>{
         setData(props.data.Search)
         localStorage.setItem('noms',JSON.stringify(nominations))
-        localStorage.setItem('keys', JSON.stringify(keys))
+        localStorage.setItem('keys',JSON.stringify(keys))
         setNominations(nominations)
         setKeys(keys)
         // setCount(count)
         
     },[nominations, props.data,keys])
     
-    const handleAdd = (movie,index) => {
-        console.log(movie)
+    const handleAdd = (movie) => {
+       console.log('adding index',movie.imdbID)
       const newNoms = [...nominations]
       newNoms.push(movie)
       setNominations(newNoms)
       setKeys({
           ...keys,
-        [index]: true
+        [movie.imdbID]: true
       })
       //localStorage.setItem('noms',nominations)
     }
 
     const handleRemove = (movie,index) => {
-        
+        console.log(movie.imdbID)
+      //if (nominations.length === 0) localStorage.clear()
+      keys[movie.imdbID] = false
+      setKeys(keys)
       const newNoms = [...nominations]
       newNoms.splice((index),1)
       setNominations(newNoms)
-      const newKeys = {...keys}
-      setKeys({
-
-        [index]: false
-    })
+      
+      
+     
       //localStorage.setItem('noms',nominations)
     }
 
@@ -56,8 +57,8 @@ const Main = props => {
                     data && data.map((movie,index) => 
                     <div className="movie" key={index}>
                         <h4 className="title">Title: {movie.Title} ({movie.Year})</h4>
-                         {console.log('keys',keys)}
-                         <button id={index} className="nominate" disabled={keys[index] } onClick={() => handleAdd(movie,index)}>Nominate</button>
+                      
+                         <button id={index} className="nominate" disabled={keys[movie.imdbID] } onClick={() => handleAdd(movie,index)}>Nominate</button>
                     </div>
                     )
                 }
@@ -70,7 +71,7 @@ const Main = props => {
                     nominations && nominations.map((movie,index) => 
                     <div className="movie" key={index}>
                         <h4 className="title">Title: {movie.Title} ({movie.Year})</h4>
-                        <button className="nominate" onClick={() => handleRemove(movie)}>Remove</button>
+                        <button className="nominate" onClick={() => handleRemove(movie,index)}>Remove</button>
                     </div>
                     )
                 }
