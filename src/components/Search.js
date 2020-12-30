@@ -14,7 +14,7 @@ const Search = props => {
     const onSubmit = (e) => {
         e.preventDefault() //prevent page refresh
         axios
-       .get(`http://www.omdbapi.com/?apikey=dbfae813&s=${title}&type=movie`) //fetch data from proxy server
+       .get(`https://www.omdbapi.com/?apikey=dbfae813&s=${title}&type=movie`) //fetch data from proxy server
        .then(res => { 
                //console.log(res)
                props.setData(res.data)
