@@ -2,14 +2,15 @@ import React from 'react'
 import './Main.css'
 import Popup from './Popup'
 import {useEffect, useState} from 'react'
+
 const Main = props => {
    const [data,setData] = useState('')
-   let retrievedData = localStorage.getItem("noms");
-   let parsed = JSON.parse(retrievedData);
-   let retrievedKeys = localStorage.getItem("keys");
+   let retrievedData = localStorage.getItem("noms"); //save user nominations in local storage
+   let parsed = JSON.parse(retrievedData); // convert data back to array
+   let retrievedKeys = localStorage.getItem("keys"); //store keys for disabling buttons if nominated
    let parsedKeys = JSON.parse(retrievedKeys);
-   const [nominations,setNominations] = useState( parsed || [] )
-   const [keys, setKeys] = useState(parsedKeys || {})
+   const [nominations,setNominations] = useState( parsed || [] ) //display saved nominations if applicable
+   const [keys, setKeys] = useState(parsedKeys || {}) //disable buttons if applicable
 
    
    useEffect(()=>{
@@ -18,7 +19,8 @@ const Main = props => {
         localStorage.setItem('keys',JSON.stringify(keys))
         setNominations(nominations)
         setKeys(keys)
-        // setCount(count)
+        
+        //activate banner if they nominate 5 movies
         if (nominations.length === 5) {
             document.querySelector('.popup-button').click()
         }
@@ -26,29 +28,30 @@ const Main = props => {
     },[nominations, props.data,keys])
     
     const handleAdd = (movie) => {
-       console.log('adding index',movie.imdbID)
+      
       const newNoms = [...nominations]
       newNoms.push(movie)
       setNominations(newNoms)
+      
+      //use keys to disable buttons
       setKeys({
           ...keys,
         [movie.imdbID]: true
       })
 
-      
-      //localStorage.setItem('noms',nominations)
+ 
     }
 
     const handleRemove = (movie,index) => {
-        console.log(movie.imdbID)
-      //if (nominations.length === 0) localStorage.clear()
-      keys[movie.imdbID] = false
+      
+   
+      keys[movie.imdbID] = false // set to false to reactivate button
       setKeys(keys)
       const newNoms = [...nominations]
-      newNoms.splice((index),1)
+      newNoms.splice((index),1) //remove movie from nominations
       setNominations(newNoms)
       
-      //localStorage.setItem('noms',nominations)
+   
     }
     
  
